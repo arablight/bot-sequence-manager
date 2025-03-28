@@ -9,7 +9,6 @@ import AccountForm from '@/components/AccountForm';
 import AccountsGrid from '@/components/AccountsGrid';
 import { useToast } from '@/components/ui/use-toast';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { ModeToggle } from '@/components/ModeToggle';
 
 const Index = () => {
   const { isRunning, startBot, stopBot } = useBot();
@@ -19,7 +18,7 @@ const Index = () => {
   const [editingAccount, setEditingAccount] = useState<Account | undefined>(undefined);
 
   useEffect(() => {
-    // Load accounts from storage
+    // تحميل الحسابات من التخزين
     setAccounts(getAccounts());
   }, []);
 
@@ -36,8 +35,8 @@ const Index = () => {
   const handleDeleteAccount = (accountId: string) => {
     if (isRunning) {
       toast({
-        title: "Cannot delete account",
-        description: "Stop the bot before deleting accounts",
+        title: "لا يمكن حذف الحساب",
+        description: "يجب إيقاف البوت قبل حذف الحسابات",
         variant: "destructive"
       });
       return;
@@ -50,12 +49,12 @@ const Index = () => {
 
   const handleSaveAccount = (account: Omit<Account, 'id' | 'order'> | Account) => {
     if ('id' in account) {
-      // Update existing account
+      // تحديث حساب موجود
       if (updateAccount(account)) {
         setAccounts(getAccounts());
       }
     } else {
-      // Create new account
+      // إنشاء حساب جديد
       const newAccount = saveAccount(account);
       if (newAccount) {
         setAccounts(getAccounts());
@@ -70,23 +69,22 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background" dir="rtl">
       <header className="border-b">
         <div className="container mx-auto flex justify-between items-center py-4">
-          <h1 className="text-2xl font-bold">Sequential Race Bot</h1>
+          <h1 className="text-2xl font-bold">بوت السباق المتسلسل</h1>
           <div className="flex items-center space-x-2">
-            <ModeToggle />
             <Button
               onClick={isRunning ? stopBot : startBot}
               className={`w-32 ${isRunning ? 'bg-red-500 hover:bg-red-600' : 'bg-green-500 hover:bg-green-600'}`}
             >
               {isRunning ? (
                 <>
-                  <Square className="mr-2 h-4 w-4" /> Stop
+                  <Square className="mr-2 h-4 w-4" /> إيقاف
                 </>
               ) : (
                 <>
-                  <Play className="mr-2 h-4 w-4" /> Start
+                  <Play className="mr-2 h-4 w-4" /> تشغيل
                 </>
               )}
             </Button>
@@ -98,22 +96,22 @@ const Index = () => {
         <Tabs defaultValue="accounts">
           <div className="flex justify-between items-center mb-6">
             <TabsList>
-              <TabsTrigger value="accounts">Accounts</TabsTrigger>
-              <TabsTrigger value="settings">Settings</TabsTrigger>
+              <TabsTrigger value="accounts">الحسابات</TabsTrigger>
+              <TabsTrigger value="settings">الإعدادات</TabsTrigger>
             </TabsList>
             
             <Button onClick={handleAddAccount}>
-              <Plus className="mr-2 h-4 w-4" /> Add Account
+              <Plus className="ml-2 h-4 w-4" /> إضافة حساب
             </Button>
           </div>
           
           <TabsContent value="accounts" className="mt-6">
             {accounts.length === 0 ? (
               <div className="text-center py-8">
-                <h2 className="text-xl font-semibold mb-2">No Accounts Added</h2>
-                <p className="text-muted-foreground mb-4">Add your first WOLF account to get started</p>
+                <h2 className="text-xl font-semibold mb-2">لا توجد حسابات مضافة</h2>
+                <p className="text-muted-foreground mb-4">أضف حساب WOLF الخاص بك للبدء</p>
                 <Button onClick={handleAddAccount}>
-                  <Plus className="mr-2 h-4 w-4" /> Add Account
+                  <Plus className="ml-2 h-4 w-4" /> إضافة حساب
                 </Button>
               </div>
             ) : (
@@ -128,23 +126,23 @@ const Index = () => {
           
           <TabsContent value="settings">
             <div className="max-w-2xl mx-auto">
-              <h2 className="text-xl font-semibold mb-4">Bot Settings</h2>
+              <h2 className="text-xl font-semibold mb-4">إعدادات البوت</h2>
               <p className="text-muted-foreground mb-4">
-                Configure settings for the Sequential Race Bot. More options will be available in the next phase.
+                قم بتكوين إعدادات بوت السباق المتسلسل. ستتوفر المزيد من الخيارات في المرحلة التالية.
               </p>
               
               <div className="border rounded-lg p-4 mb-4">
-                <h3 className="font-medium mb-2">Status</h3>
+                <h3 className="font-medium mb-2">الحالة</h3>
                 <p className="flex items-center">
-                  <span className={`inline-block w-3 h-3 rounded-full mr-2 ${isRunning ? 'bg-green-500' : 'bg-red-500'}`}></span>
-                  {isRunning ? 'Bot is running' : 'Bot is stopped'}
+                  <span className={`inline-block w-3 h-3 rounded-full ml-2 ${isRunning ? 'bg-green-500' : 'bg-red-500'}`}></span>
+                  {isRunning ? 'البوت يعمل' : 'البوت متوقف'}
                 </p>
               </div>
               
               <div className="border rounded-lg p-4">
-                <h3 className="font-medium mb-2">Connection Status</h3>
+                <h3 className="font-medium mb-2">حالة الاتصال</h3>
                 <p className="text-muted-foreground">
-                  WOLF connection will be implemented in the next phase.
+                  سيتم تنفيذ اتصال WOLF في المرحلة التالية.
                 </p>
               </div>
             </div>

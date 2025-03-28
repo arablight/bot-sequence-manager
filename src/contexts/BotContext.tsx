@@ -15,12 +15,12 @@ export const BotProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
 
   const startBot = () => {
     setIsRunning(true);
-    toast.success('Bot started successfully');
+    toast.success('تم تشغيل البوت بنجاح');
   };
 
   const stopBot = () => {
     setIsRunning(false);
-    toast.success('Bot stopped successfully');
+    toast.success('تم إيقاف البوت بنجاح');
   };
 
   return (
@@ -33,7 +33,7 @@ export const BotProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
 export const useBot = (): BotContextType => {
   const context = useContext(BotContext);
   if (context === undefined) {
-    throw new Error('useBot must be used within a BotProvider');
+    throw new Error('يجب استخدام useBot داخل BotProvider');
   }
   return context;
 };

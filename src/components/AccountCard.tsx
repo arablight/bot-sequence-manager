@@ -18,7 +18,7 @@ const AccountCard: React.FC<AccountCardProps> = ({ account, onEdit, onDelete }) 
   return (
     <Card className={`w-64 h-64 bg-account-${account.color} relative group overflow-hidden transition-all duration-200 hover:shadow-lg`}>
       <CardContent className="p-6 h-full flex flex-col justify-between">
-        <div className="absolute top-2 right-2 flex space-x-1 opacity-0 group-hover:opacity-100 transition-opacity">
+        <div className="absolute top-2 left-2 flex space-x-1 opacity-0 group-hover:opacity-100 transition-opacity">
           <Button 
             variant="secondary" 
             size="icon" 
@@ -33,7 +33,7 @@ const AccountCard: React.FC<AccountCardProps> = ({ account, onEdit, onDelete }) 
             className="h-8 w-8 rounded-full bg-white/80 hover:bg-white"
             onClick={() => onDelete(account.id)}
             disabled={isRunning}
-            title={isRunning ? "Cannot delete account while bot is running" : "Delete account"}
+            title={isRunning ? "لا يمكن حذف الحساب أثناء تشغيل البوت" : "حذف الحساب"}
           >
             <Trash2 className="h-4 w-4 text-gray-800" />
           </Button>
