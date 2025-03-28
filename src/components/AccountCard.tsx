@@ -15,10 +15,13 @@ interface AccountCardProps {
 const AccountCard: React.FC<AccountCardProps> = ({ account, onEdit, onDelete }) => {
   const { isRunning } = useBot();
   
+  // الألوان الحقيقية مطابقة للتصنيف في tailwind
+  const bgColorClass = `bg-account-${account.color}`;
+  
   return (
-    <Card className={`w-64 h-64 bg-account-${account.color} relative group overflow-hidden transition-all duration-200 hover:shadow-lg`}>
+    <Card className={`w-64 h-64 ${bgColorClass} relative group overflow-hidden transition-all duration-200 hover:shadow-lg`}>
       <CardContent className="p-6 h-full flex flex-col justify-between">
-        <div className="absolute top-2 left-2 flex space-x-1 opacity-100 group-hover:opacity-100 transition-opacity">
+        <div className="absolute top-2 right-2 flex space-x-1 opacity-100 group-hover:opacity-100 transition-opacity">
           <Button 
             variant="secondary" 
             size="icon" 

@@ -112,6 +112,27 @@ const AccountForm: React.FC<AccountFormProps> = ({ account, isOpen, onClose, onS
     setFormData(prev => ({ ...prev, color }));
   };
 
+  // قاموس الترجمة للألوان بالعربية
+  const colorNames: Record<AccountColor, string> = {
+    red: 'أحمر',
+    orange: 'برتقالي',
+    amber: 'كهرماني',
+    yellow: 'أصفر',
+    lime: 'ليموني',
+    green: 'أخضر',
+    emerald: 'زمردي',
+    teal: 'أزرق مخضر',
+    cyan: 'سماوي',
+    sky: 'سماوي فاتح',
+    blue: 'أزرق',
+    indigo: 'نيلي',
+    violet: 'بنفسجي',
+    purple: 'أرجواني',
+    fuchsia: 'فوشيا',
+    pink: 'وردي',
+    rose: 'وردي غامق'
+  };
+
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="sm:max-w-md border-gray-700 bg-gray-800 text-white" dir="rtl">
@@ -172,12 +193,16 @@ const AccountForm: React.FC<AccountFormProps> = ({ account, isOpen, onClose, onS
                   type="button"
                   onClick={() => handleColorSelect(color)}
                   className={`w-full h-12 rounded-lg bg-account-${color} hover:opacity-90 transition-opacity ${
-                    formData.color === color ? 'ring-4 ring-offset-2 ring-white' : ''
+                    formData.color === color ? 'ring-4 ring-offset-2 ring-white ring-offset-gray-800' : ''
                   }`}
-                  aria-label={`لون ${color}`}
+                  title={colorNames[color]}
+                  aria-label={`لون ${colorNames[color]}`}
                 />
               ))}
             </div>
+            <p className="text-sm text-gray-300 mt-1">
+              اللون المحدد: {colorNames[formData.color]}
+            </p>
           </div>
           
           <DialogFooter className="pt-4 flex justify-between">
