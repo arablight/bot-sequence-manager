@@ -85,6 +85,16 @@ const AccountForm: React.FC<AccountFormProps> = ({ account, isOpen, onClose, onS
       });
     }
     
+    // تفريغ الحقول بعد الإضافة بنجاح
+    if (!account) {
+      setFormData({
+        alias: '',
+        email: '',
+        password: '',
+        color: 'blue',
+      });
+    }
+    
     onClose();
   };
 
@@ -104,27 +114,27 @@ const AccountForm: React.FC<AccountFormProps> = ({ account, isOpen, onClose, onS
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="sm:max-w-md" dir="rtl">
+      <DialogContent className="sm:max-w-md border-gray-700 bg-gray-800 text-white" dir="rtl">
         <DialogHeader>
-          <DialogTitle>{account ? 'تعديل الحساب' : 'إضافة حساب جديد'}</DialogTitle>
+          <DialogTitle className="text-white">{account ? 'تعديل الحساب' : 'إضافة حساب جديد'}</DialogTitle>
         </DialogHeader>
         
         <form onSubmit={handleSubmit} className="space-y-4 py-4">
           <div className="space-y-2">
-            <Label htmlFor="alias">الاسم المستعار (الاسم الظاهر)</Label>
+            <Label htmlFor="alias" className="text-gray-200">الاسم المستعار (الاسم الظاهر)</Label>
             <Input 
               id="alias" 
               name="alias" 
               value={formData.alias} 
               onChange={handleChange}
               placeholder="أدخل الاسم المستعار"
-              className={errors.alias ? "border-red-500" : ""}
+              className={errors.alias ? "border-red-500 bg-gray-700 text-white" : "bg-gray-700 text-white"}
             />
             {errors.alias && <p className="text-red-500 text-sm">{errors.alias}</p>}
           </div>
           
           <div className="space-y-2">
-            <Label htmlFor="email">البريد الإلكتروني</Label>
+            <Label htmlFor="email" className="text-gray-200">البريد الإلكتروني</Label>
             <Input 
               id="email" 
               name="email" 
@@ -132,14 +142,14 @@ const AccountForm: React.FC<AccountFormProps> = ({ account, isOpen, onClose, onS
               value={formData.email} 
               onChange={handleChange}
               placeholder="أدخل البريد الإلكتروني لتسجيل دخول WOLF"
-              className={errors.email ? "border-red-500" : ""}
+              className={errors.email ? "border-red-500 bg-gray-700 text-white" : "bg-gray-700 text-white"}
               dir="ltr"
             />
             {errors.email && <p className="text-red-500 text-sm">{errors.email}</p>}
           </div>
           
           <div className="space-y-2">
-            <Label htmlFor="password">كلمة المرور</Label>
+            <Label htmlFor="password" className="text-gray-200">كلمة المرور</Label>
             <Input 
               id="password" 
               name="password" 
@@ -147,14 +157,14 @@ const AccountForm: React.FC<AccountFormProps> = ({ account, isOpen, onClose, onS
               value={formData.password} 
               onChange={handleChange}
               placeholder="أدخل كلمة المرور لتسجيل دخول WOLF"
-              className={errors.password ? "border-red-500" : ""}
+              className={errors.password ? "border-red-500 bg-gray-700 text-white" : "bg-gray-700 text-white"}
               dir="ltr"
             />
             {errors.password && <p className="text-red-500 text-sm">{errors.password}</p>}
           </div>
           
           <div className="space-y-2">
-            <Label>لون البطاقة</Label>
+            <Label className="text-gray-200">لون البطاقة</Label>
             <div className="grid grid-cols-6 gap-3 mt-2">
               {accountColors.map(color => (
                 <button 
@@ -162,7 +172,7 @@ const AccountForm: React.FC<AccountFormProps> = ({ account, isOpen, onClose, onS
                   type="button"
                   onClick={() => handleColorSelect(color)}
                   className={`w-full h-12 rounded-lg bg-account-${color} hover:opacity-90 transition-opacity ${
-                    formData.color === color ? 'ring-4 ring-offset-2 ring-black dark:ring-white' : ''
+                    formData.color === color ? 'ring-4 ring-offset-2 ring-white' : ''
                   }`}
                   aria-label={`لون ${color}`}
                 />
@@ -171,10 +181,10 @@ const AccountForm: React.FC<AccountFormProps> = ({ account, isOpen, onClose, onS
           </div>
           
           <DialogFooter className="pt-4 flex justify-between">
-            <Button type="button" variant="outline" onClick={onClose}>
+            <Button type="button" variant="outline" onClick={onClose} className="bg-transparent border-gray-600 text-gray-200 hover:bg-gray-700">
               إلغاء
             </Button>
-            <Button type="submit">
+            <Button type="submit" className="bg-blue-600 hover:bg-blue-700 text-white">
               {account ? 'حفظ التغييرات' : 'إضافة حساب'}
             </Button>
           </DialogFooter>

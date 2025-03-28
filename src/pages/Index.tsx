@@ -70,9 +70,9 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background" dir="rtl">
-      <header className="border-b">
+      <header className="border-b border-gray-700">
         <div className="container mx-auto flex justify-between items-center py-4">
-          <h1 className="text-2xl font-bold">بوت السباق المتسلسل</h1>
+          <h1 className="text-2xl font-bold text-white">بوت السباق المتسلسل</h1>
           <div className="flex items-center space-x-2">
             <Button
               onClick={isRunning ? stopBot : startBot}
@@ -93,24 +93,24 @@ const Index = () => {
       </header>
 
       <main className="container mx-auto py-8">
-        <Tabs defaultValue="accounts">
+        <Tabs defaultValue="accounts" className="text-white">
           <div className="flex justify-between items-center mb-6">
-            <TabsList>
-              <TabsTrigger value="accounts">الحسابات</TabsTrigger>
-              <TabsTrigger value="settings">الإعدادات</TabsTrigger>
+            <TabsList className="bg-gray-700">
+              <TabsTrigger value="accounts" className="data-[state=active]:bg-blue-600 data-[state=active]:text-white hover:text-white">الحسابات</TabsTrigger>
+              <TabsTrigger value="settings" className="data-[state=active]:bg-blue-600 data-[state=active]:text-white hover:text-white">الإعدادات</TabsTrigger>
             </TabsList>
             
-            <Button onClick={handleAddAccount}>
+            <Button onClick={handleAddAccount} className="bg-blue-600 hover:bg-blue-700">
               <Plus className="ml-2 h-4 w-4" /> إضافة حساب
             </Button>
           </div>
           
           <TabsContent value="accounts" className="mt-6">
             {accounts.length === 0 ? (
-              <div className="text-center py-8">
-                <h2 className="text-xl font-semibold mb-2">لا توجد حسابات مضافة</h2>
-                <p className="text-muted-foreground mb-4">أضف حساب WOLF الخاص بك للبدء</p>
-                <Button onClick={handleAddAccount}>
+              <div className="text-center py-8 bg-gray-800 rounded-lg">
+                <h2 className="text-xl font-semibold mb-2 text-white">لا توجد حسابات مضافة</h2>
+                <p className="text-gray-300 mb-4">أضف حساب WOLF الخاص بك للبدء</p>
+                <Button onClick={handleAddAccount} className="bg-blue-600 hover:bg-blue-700">
                   <Plus className="ml-2 h-4 w-4" /> إضافة حساب
                 </Button>
               </div>
@@ -125,23 +125,23 @@ const Index = () => {
           </TabsContent>
           
           <TabsContent value="settings">
-            <div className="max-w-2xl mx-auto">
-              <h2 className="text-xl font-semibold mb-4">إعدادات البوت</h2>
-              <p className="text-muted-foreground mb-4">
+            <div className="max-w-2xl mx-auto bg-gray-800 p-6 rounded-lg">
+              <h2 className="text-xl font-semibold mb-4 text-white">إعدادات البوت</h2>
+              <p className="text-gray-300 mb-4">
                 قم بتكوين إعدادات بوت السباق المتسلسل. ستتوفر المزيد من الخيارات في المرحلة التالية.
               </p>
               
-              <div className="border rounded-lg p-4 mb-4">
-                <h3 className="font-medium mb-2">الحالة</h3>
-                <p className="flex items-center">
+              <div className="border border-gray-700 rounded-lg p-4 mb-4">
+                <h3 className="font-medium mb-2 text-white">الحالة</h3>
+                <p className="flex items-center text-gray-200">
                   <span className={`inline-block w-3 h-3 rounded-full ml-2 ${isRunning ? 'bg-green-500' : 'bg-red-500'}`}></span>
                   {isRunning ? 'البوت يعمل' : 'البوت متوقف'}
                 </p>
               </div>
               
-              <div className="border rounded-lg p-4">
-                <h3 className="font-medium mb-2">حالة الاتصال</h3>
-                <p className="text-muted-foreground">
+              <div className="border border-gray-700 rounded-lg p-4">
+                <h3 className="font-medium mb-2 text-white">حالة الاتصال</h3>
+                <p className="text-gray-300">
                   سيتم تنفيذ اتصال WOLF في المرحلة التالية.
                 </p>
               </div>
